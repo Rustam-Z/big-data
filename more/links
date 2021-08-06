@@ -1,0 +1,13 @@
+Python 
+Corey, Multiprocessing https://www.youtube.com/watch?v=fKl2JW_qrso
+Corey, Multithreading https://www.youtube.com/watch?v=IEEhzQoKtQU
+https://www.youtube.com/watch?v=hLk8CZCn-Zs&list=PLUbFnGajtZlUl0zYr4crGveP21BbcZG_L&index=52
++ scrapping, https://www.youtube.com/watch?v=RR4SoktDQAw&list=PL5tcWHG-UPH3SX16DI6EP1FlEibgxkg_6
+
+
+AirFlow - for data scheduling
+https://airflow.apache.org/docs/apache-airflow/stable/index.html
+
+
+PySpark - for data processing, transformation
+https://spark.apache.org/docs/latest/api/python/
