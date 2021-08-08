@@ -13,6 +13,7 @@ Tech: Python, SQL, Linux, Cloud, Airflow, PySpark
 - [Introduction](#Introduction)
 - [ETL (Extract, Load, Transform)](#ETL)
 - [Streamlined Data Ingestion with pandas](#Streamlined-Data-Ingestion-with-pandas)
+- [Writing efficient code in Python](#Writing-efficient-code-in-python)
 
 ## Introduction
 <a href="https://www.youtube.com/watch?v=xC-c7E5PK0Y"> <img src="img/data_jobs.jpg" width=600 alt="Who is the Data Engineer actually?"></a>
@@ -109,21 +110,16 @@ Now that we have a python function that describes the full ETL, we need to make 
 - Extract from a database, like a SQL application database for customer data
 ```py
 import requests
-
 resp = requests.get("https://hacker-news.firebaseio.com/v0/item/16222426.json")
 print(resp.json())
-
 post_score = resp.json()["score"]
-print(post_score)
 ```
 ```py
-import json
 result = json.loads('{"key_1":"value_1","key_2":"value_2"}')
 print(result["key_1"])
 ```
 ```py
 import sqlalchemy
-import pandas as pd
 # postgresql://[user[:password]@][host][:port][/database]
 connection_uri = "postgresql://repl:password@localhost:5432/pagila"
 db_engine = sqlalchemy.create_engine(connection_uri)
@@ -131,7 +127,7 @@ pd.read_sql("SELECT * FROM customer", db_engine)
 ```
 
 ### Transform
-- Data transformation = data processing
+- Data transformation = data processing 
 - Data transformation mostly done with parallel computing. 
 
 customer_id | email | state | created_at
@@ -154,6 +150,22 @@ Online analytical processing (OLAP) | Online transaction processing (OLTP)
 Column-oriented | Row-oriented
 <img src="img/column_oriented.png" width=200> | <img src="img/row_oriented.png" width=200>
 
+```py
+"""LOAD"""
+
+# Finish the connection URI
+connection_uri = "postgresql://repl:password@localhost:5432/dwh"
+db_engine_dwh = sqlalchemy.create_engine(connection_uri)
+
+# Transformation step, join with recommendations data
+film_pdf_joined = film_pdf.join(recommendations)
+
+# Finish the .to_sql() call to write to store.film
+film_pdf_joined.to_sql("film", db_engine_dwh, schema="store", if_exists="replace")
+
+# Run the query to fetch the data
+pd.read_sql("SELECT film_id, recommended_film_ids FROM store.film", db_engine_dwh)
+```
 
 ## Streamlined data ingestion with pandas
 **Importing data from flat files (CSV)**
@@ -305,4 +317,74 @@ print(bookstores.name) # columns
 # Merging -> on columns
 # Merge crosswalk into cafes on their zip code fields
 cafes_with_pumas = cafes.merge(crosswalk, left_on='location_zip_code', right_on='zipcode')
+```
+
+## Writing efficient code in Python
+```py
+""" 
+- Use [map, filter, enumerate, zip, list comperehesion] instead of loops'
+- itertools, collection library, 'set' build-ins;
+- iterator, generator;
+""" 
+
+[(i,name) for i,name in enumerate(names)] == [*enumerate(names, start=0)] # true
+
+[sum(row) for row in my_iterable] == [*map(sum, my_iterable)] # true
+
+# https://www.geeksforgeeks.org/difference-between-iterator-vs-generator/
+```
+```py
+"""Timing and profiling code"""
+%lsmagic
+
+# runs to 2 (-r2), number of loops to 10 (-n10)
+%timeit -r2 -n10 rand_nums = np.random.rand(1000)
+%%timeit # for multiple line
+times = %timeit -o rand_nums = np.random.rand(1000) # save output into variable
+
+"""pip install line_profiler"""
+%load_ext line_profiler
+%timeit convert_units(heroes, hts, wts)
+# -f means function, then function name, then fuction parameters
+%lprun -f convert_units convert_units(heroes, hts, wts)
+
+"""Memory usage"""
+%load_ext memory_profiler
+%mprun -f convert_units convert_units(heroes, hts, wts)
+```
+```py
+"""Pandas optimizations"""
+# 1. iterrows()
+df = pd.DataFrame({'c1': [10, 11, 12], 'c2': [100, 110, 120]})
+
+for index, row in df.iterrows(): 
+    print(row['c1'], row['c2'])
+    # 10 100
+    # 11 110
+    # 12 120
+
+'''
+# no need to specify the index, iterrows takes care about it:
+for i, row in df1.iterrows():
+    wins = row['W']
+    games_played = row['G']
+'''
+# 2. itertuples() --> efficient
+for row in df1.iterrows():
+    wins = row.SomeColumn
+
+# 3. .apply() function, column=0, row=1 --> even better
+def norm_by_data2(x):
+    # x is a DataFrame of group values
+    x['data1'] /= x['data2'].sum() 
+    return x
+print(df.groupby('key').apply(norm_by_data2)) # will send all dataset
+
+'''
+# send row by row
+df.apply(lambda row: my_function(row[0], row[2])), axis=1)
+'''
+
+# 4. Vectorization 
+my_df = df1['A'].values - df2['B'].values
 ```
