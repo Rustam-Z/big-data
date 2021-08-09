@@ -1,17 +1,26 @@
 # Need to be refreshed:
 Intro to Data Engineering
-Pandas, EDA 
+EDA with Pandas
 
 ______________________________________________
 # Need to learn:
-Airflow
-Python+SQL+ORM
+Python+Database from w3schoold
 Python Efficient Code + Corey Scafer 
 django, flask, API building
+SQL+ORM YouTube
+ 
+Airflow
+Data Warehousing (Snowflake)
+ETL pipeline
 
+AWS
+Big Data
 
 ______________________________________________
-# Done:
-Data Engineer with Python
-Streamlined Data Ingestion with pandas
+# Done --> 5
+Data engineering for everyone
+Intro to data engineering
+Streamlined data ingestion with pandas
 Writing Efficient Python Code
+Writing Functions in Python
+-- 5 done --
