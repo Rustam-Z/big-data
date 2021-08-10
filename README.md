@@ -6,15 +6,16 @@ What data engineer should know:
 Need to have an experience on Python (data science related, OOP), ETL (Extract, Transform, Load) process, data warehousing (Snowflake), Databases (MSSQL/Postgre/MySQL), SQL+ORM, REST/SOAP/GraphQL APIs, Django/Flask/FastAPI, Azure, AWS, Airflow, Big Data 
 -->
 
-Keywords: data pipeline, ETL process, data lake & warehouse, data scheduling
-
-Tech: Python, SQL, Linux, Cloud, Airflow, PySpark
+    Keywords: data pipeline, ETL process, data lake, date warehouse, data scheduling
+    
+    Tech: Python, SQL, Linux, Cloud, Airflow, PySpark
 
 - [Introduction](#Introduction)
 - [ETL (Extract, Load, Transform)](#ETL)
 - [Streamlined data ingestion with Pandas](#Streamlined-Data-Ingestion-with-pandas)
 - [Writing efficient code in Python](#Writing-efficient-code-in-python)
 - [Writing functions in Python](#Writing-Functions-in-Python) 
+- [Introduction to shell](#Introduction-to-shell)
 
 ## Introduction
 <a href="https://www.youtube.com/watch?v=xC-c7E5PK0Y"> <img src="img/data_jobs.jpg" width=600 alt="Who is the Data Engineer actually?"></a>
@@ -611,4 +612,42 @@ def hello(name):
   return 'Hello {}!'.format(name)
   
 print(hello('Alice'))
+```
+
+## Introduction to shell
+```shell
+$ # when starting with / then it is an absolute path
+$ man head # see manual
+$ ls -R -F 
+$ history # !head, !2
+$ cp original.txt duplicate.txt # copy
+$ cp seasonal/autumn.csv seasonal/winter.csv backup
+$ mv autumn.csv winter.csv # move
+$ rm thesis.txt backup/thesis-2017-08.txt # remove
+$ mkdir test_dir # make directory
+$ rmdir test_dir # remove directory
+$ 
+$ # HOW TO VIEW FILES CONTENTS
+$ cat agarwal.txt
+$ less seasonal/spring.csv
+$ head -n 10 seasonal/summer.csv # view 10 lines | "tail"
+$ grep -c -i -n value seasonal/winter.csv # select lines containing specific values, -v inverting
+$ head -n 5 seasonal/winter.csv > bottom.csv # storing output
+$ tail -n 3 bottom.csv
+$ head -n 5 seasonal/summer.csv | tail -n 3 # combining commands
+$ cut -f 2  -d , seasonal/summer.csv | grep -v Tooth | sort -r | uniq -c 
+$ cut -d , -f 1 seasonal/* # cut -d , -f 1 seasonal/*.csv
+$ # ? one char, [97] chars inside, {s*.txt, *.csv} for comma seperated
+$ history | tail -n 3 > steps.txt
+$
+$ set | grep HOME
+$ echo $USER # get the variable
+$ for filename in seasonal/*.csv; do echo $filename; done
+$ for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done # many commands inside loop
+$
+$ nano dates.sh # write some shell commands
+$ bash dates.sh
+$ # 1. if dates.sh has "sort $@ | uniq", with $@ we can send specific files like "bash dates.sh summer.csv"
+$ # 2. or even bash script may have "cut -d , -f $2 $1", then while running it use "bash column.sh seasonal/autumn.csv 1"
+$ 
 ```
