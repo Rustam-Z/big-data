@@ -16,6 +16,7 @@ Need to have an experience on Python (data science related, OOP), ETL (Extract, 
 - [Writing efficient code in Python](#Writing-efficient-code-in-python)
 - [Writing functions in Python](#Writing-Functions-in-Python) 
 - [Introduction to shell](#Introduction-to-shell)
+- [Data processing in shell](Data-Processing-in-Shell)
 
 ## Introduction
 <a href="https://www.youtube.com/watch?v=xC-c7E5PK0Y"> <img src="img/data_jobs.jpg" width=600 alt="Who is the Data Engineer actually?"></a>
@@ -615,6 +616,7 @@ print(hello('Alice'))
 ```
 
 ## Introduction to shell
+`;` links commands and runs sequentially, `&&` also links but waits for the previous commandz , `|` pipe uses output of 1st for 2nd command, `>` saves output into file
 ```shell
 $ # when starting with / then it is an absolute path
 $ man head # see manual
@@ -642,6 +644,7 @@ $ history | tail -n 3 > steps.txt
 $
 $ set | grep HOME
 $ echo $USER # get the variable
+$ echo "print('Hello')" > hello.py
 $ for filename in seasonal/*.csv; do echo $filename; done
 $ for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done # many commands inside loop
 $
@@ -650,4 +653,50 @@ $ bash dates.sh
 $ # 1. if dates.sh has "sort $@ | uniq", with $@ we can send specific files like "bash dates.sh summer.csv"
 $ # 2. or even bash script may have "cut -d , -f $2 $1", then while running it use "bash column.sh seasonal/autumn.csv 1"
 $ 
+```
+
+## Data processing in shell
+**Downloading data on the command line with CURL and WGET**
+```shell
+$ curl -O https://websitename.com/datafilename.txt
+$ curl -o renameddatafilename.txt https://websitename.com/datafilename.txt
+$ curl -O https://websitename.com/datafilename*.txt # to get ALL txt file at one with *
+$ curl -O https://websitename.com/datafilename[001-100:10].txt # download every 10th file from 1 till 100
+$ curl -L -O -C https://websitename.com/datafilename[001-100].txt # -L redirect, -C resume previous file transfer 
+$ # wget is good for multiple files
+$ wget -i url_list.txt # --limit-rate=200k --wait=2
+```
+**Data cleaning on the command line** `csvkit`
+```shell
+$ pip install csvkit
+$ in2csv data.xlsx > data.csv # converting files to CSV
+$ in2csv -n data.xlsx # print sheet names
+$ in2csv data.xlsx --sheet "Sheet 1" > data.csv
+$ csvlook data.csv
+$
+$ csvcut -h # column
+$ csvgrep -h # row, -m=manually, -r=regex, -f=path
+$ csvcut -n data.csv # print names of columns
+$ csvcut -c 1,2 data.csv # prints 1st and 2nd column OR [-c "column_name","column2_name"] without space between
+$ csvgrep -c "danceability" -m 0.812 Spotify_MusicAttributes.csv
+$
+$ csvstack data1.csv data2.csv > data_new.csv
+$ csv -g "Rank 1", "Rank 2" data1.csv data2.csv > data_new.csv # we will have new column, which will tell from which file the row come out
+```
+**Database Operations on the Command Line**
+```shell
+$ sql2csv --db "sqlite:///spotify.db" \
+          --query "SELECT * FROM popularity" \
+          > spotify_popularity.csv
+$ csvsql --db "sqlite:///SpotifyDatabase.db" --insert Spotify_MusicAttributes.csv # Upload Spotify_MusicAttributes.csv to database
+$ sqlquery="SELECT * FROM Spotify_MusicAttributes"
+$ sql2csv --db "sqlite:///SpotifyDatabase.db" --query "$sqlquery" # Apply SQL query to re-pull new table in database
+```
+**CRON**
+```shell
+$ man crontab
+$ crontab -l
+$ # * * * * * minute, hour, day of month, month, day of week
+$ # * * * * * means every minute of every hour of every day of every month and of every day of week
+$ echo "* * * * * python hello_world.py" | crontab
 ```
