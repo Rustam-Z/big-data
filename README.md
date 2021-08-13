@@ -8,7 +8,7 @@ Need to have an experience on Python (data science related, OOP), ETL (Extract, 
 
     Keywords: data pipeline, ETL process, data lake, date warehouse, data scheduling
     
-    Tech: Python, SQL, Linux, Cloud, Airflow, PySpark
+    Tech: Python, SQL, Linux Bash, Cloud, Airflow, PySpark
 
 - [Introduction](#Introduction)
 - [ETL (Extract, Load, Transform)](#ETL)
@@ -16,7 +16,8 @@ Need to have an experience on Python (data science related, OOP), ETL (Extract, 
 - [Writing efficient code in Python](#Writing-efficient-code-in-python)
 - [Writing functions in Python](#Writing-Functions-in-Python) 
 - [Introduction to shell](#Introduction-to-shell)
-- [Data processing in shell](Data-Processing-in-Shell)
+- [Data processing in shell](#Data-Processing-in-Shell)
+- [Introduction to bash scripting](#Introduction-to-bash-scripting)
 
 ## Introduction
 <a href="https://www.youtube.com/watch?v=xC-c7E5PK0Y"> <img src="img/data_jobs.jpg" width=600 alt="Who is the Data Engineer actually?"></a>
@@ -640,6 +641,8 @@ $ head -n 5 seasonal/summer.csv | tail -n 3 # combining commands
 $ cut -f 2  -d , seasonal/summer.csv | grep -v Tooth | sort -r | uniq -c 
 $ cut -d , -f 1 seasonal/* # cut -d , -f 1 seasonal/*.csv
 $ # ? one char, [97] chars inside, {s*.txt, *.csv} for comma seperated
+$ egrep # regex matching
+$ sed 's/foo/linux/g' file.txt # sed does patter match and replacement
 $ history | tail -n 3 > steps.txt
 $
 $ set | grep HOME
@@ -699,4 +702,169 @@ $ crontab -l
 $ # * * * * * minute, hour, day of month, month, day of week
 $ # * * * * * means every minute of every hour of every day of every month and of every day of week
 $ echo "* * * * * python hello_world.py" | crontab
+$ # 5 1 * * * run every day at 1:05 am
+$ # 15 14 * * 0 run at 2:15pm every Sunday
+$ # */15 * * * * every 15 minute
+$ # 15,30,45 * * * * at the 15, 30 and 45 minute of every hour
+```
+
+## Introduction to bash scripting
+**From command-line to bash script**
+```bash
+$ cat two_cities.txt | egrep 'Sydney Carton|Charles Darnay' | wc -l
+$ cat animals.txt | cut -d " " -f 2 | sort | uniq -c
+```
+```bash
+#!/bin/bash
+echo $1
+echo $2
+echo $@
+echo "There are " $# "arguments"
+
+# How to run? bash args.sh one two three four five
+
+# Output:
+# one
+# two
+# one two three four five
+# There are 5 arguments
+```
+**Variables in bash**
+```bash
+hello='Rustam' # without space, prints what is inside
+
+now_var_singlequote='$hello'
+echo "Hello" $now_var_singlequote # Hello @hello
+
+now_var_doublequote="$hello"
+echo "Hello" $now_var_doublequote # Hello Rustam
+
+rightnow_doublequote="The date is $(date)." # shell within shell
+echo $rightnow_doublequot # The date is Mon 2 Dec 2019 14:13:35 AEDT
+```
+```bash
+echo "2 + 2" | bc
+
+temp_f=$1
+temp_f2=$(echo "scale=2; $temp_f - 32" | bc)
+temp_c=$(echo "scale=2; $temp_f2 * 5 / 9" | bc)
+
+echo $temp_c
+
+# How to run? bash script.sh 100
+```
+```bash
+# Create three variables from the temp data files' contents
+temp_a=$(cat temps/region_A)
+temp_b=$(cat temps/region_B)
+temp_c=$(cat temps/region_C)
+
+# Print out the three variables
+echo "The three temperatures were $temp_a, $temp_b, and $temp_c"
+```
+```bash
+# Arrays
+declare -a my_array
+my_array=(1 2 3)
+echo ${my_array[@]} # 1 2 3
+echo ${#my_array[@]} # length
+echo ${my_array[0]} # 1
+echo ${my_array[@]:1:2} # 1 starting, 2 how many elements to return, so output will be 2 3
+my_array+=(10) # appending
+
+# Associative arrays -> python dict
+declare -A city_details # declare
+city_details=([city_name]="New York" [population]=14000000) # add elements
+echo ${city_details[city_name]}
+echo ${!city_details[@]} # keys
+echo ${city_details[@]} # values
+```
+**Control statements in bash**
+```bash
+# Create variable from first ARGV element
+sfile=$1
+
+# Create an IF statement on sfile's contents
+if grep -q 'SRVM_' $sfile && grep -q 'vpt' $sfile ; then
+	# Move file if matched
+	mv $sfile good_logs/
+fi
+```
+```bash
+for x in 1 2 3
+do    
+    echo $x
+done
+
+for ((x=2;x<=4;x+=2))
+do     
+    echo $x
+done
+
+for book in $(ls books/ | grep -i 'air')
+do      
+    echo $book
+done
+# AirportBook.txt
+# FairMarketBook.txt
+
+
+x=1
+while [ $x -le 3 ];
+do    
+    echo $x    
+    ((x+=1))
+done
+```
+```bash
+# CASE
+# Use a FOR loop for each file in 'model_out/'
+for file in model_out/*
+do
+    # Create a CASE statement for each file's contents
+    case $(cat $file) in
+      *"Random Forest"*|*GBM*|*XGBoost*) # Case
+      mv $file tree_models/ ;;           # Command
+      *KNN*|*Logistic*)                  # Case
+      rm $file ;;                        # Command
+      # Create a default
+      *) 
+      echo "Unknown model in $file" ;;
+    esac
+done
+```
+**Functions and automation**
+```bash
+# 1. Example
+function hello_world () {
+    echo "hello World"
+}
+hello_world # here we call the function
+
+# 2. Example
+function return_percentage () {
+  percent=$(echo "scale=2; 100 * $1 / $2" | bc)
+  # Return the calculated percentage
+  echo $percent
+}
+
+# Call the function with 456 and 632 and echo the result
+return_test=$(return_percentage 456 632)
+echo "456 out of 632 as a percent is $return_test%"
+
+# 3. Example
+function sum_array () {
+  local sum=0
+  # Loop through, adding to base variable
+  for number in "$@"
+  do
+    sum=$(echo "$sum + $number" | bc)
+  done
+  # Echo back the result
+  echo $sum
+  }
+# Call function with array
+test_array=(14 12 23.5 16 19.34)
+total=$(sum_array "${test_array[@]}")
+echo "The total sum of the test array is $total"
 ```
