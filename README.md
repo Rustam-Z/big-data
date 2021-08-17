@@ -19,6 +19,7 @@ Need to have an experience on Python (data science related, OOP), ETL (Extract, 
 - [Data processing in shell](04_bash_scripting.md/#Data-Processing-in-Shell)
 - [Introduction to bash scripting](04_bash_scripting.md/#Introduction-to-bash-scripting)
 - [Unit testing for data science](05_unit_testing.md)
+- [Introduction to Airflow](06_airflow.md)
 
 ## Introduction
 <a href="https://www.youtube.com/watch?v=xC-c7E5PK0Y"> <img src="img/data_jobs.jpg" width=600 alt="Who is the Data Engineer actually?"></a>
