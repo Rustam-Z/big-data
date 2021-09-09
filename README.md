@@ -6,9 +6,11 @@ What data engineer should know:
 Need to have an experience on Python (data science related, OOP), ETL (Extract, Transform, Load) process, data warehousing (Snowflake), Databases (MSSQL/Postgre/MySQL), SQL+ORM, REST/SOAP/GraphQL APIs, Django/Flask/FastAPI, Azure, AWS, Airflow, Big Data 
 -->
 
-    Keywords: data pipeline, ETL process, data lake, date warehouse, data scheduling
+    Keywords: big data, data pipeline, ETL process, data lake, date warehouse, data scheduling
     
     Tech: Python, SQL, Linux Bash, Cloud, Airflow, PySpark
+
+    Big data: Apache Hadoop, HDFS, YARN, Spark, MapReduce, Spark Streaming, Apache Kafka, SQL
 
 - [Introduction](#Introduction)
 - [ETL (Extract, Load, Transform)](#ETL)
@@ -98,7 +100,7 @@ So we use S3 to store cover albums, EC2 to process songs, and RDS to store emplo
     - Join data
 - **Schedules** Apache Airflow
 - **Data pipeline**
-    - <img src="img/data_pipeline.pnEg" width=500>
+    - <img src="img/data_pipeline.png" width=500>
     
 ## ETL
 <img src="img/etl.png" width=800>
