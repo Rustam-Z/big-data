@@ -1,4 +1,4 @@
-# Big Data
+# Big Data 
 
     Tools: 
     Python
@@ -12,20 +12,19 @@
     Apache Kafka
     SQL
 
-- https://learn.datacamp.com/skill-tracks/big-data-with-pyspark Spark
+## How to learn:
 - https://www.youtube.com/watch?v=DCaiZq3aBSc Hadoop
-- https://www.youtube.com/watch?v=1vbXmCrkT3Y Edureca Big Data
+- https://cognitiveclass.ai/learn/big-data Big data, Hadoop, Spark 
+- https://www.mygreatlearning.com/academy/courses/2618180/10977#?utm_source=share_with_friends Also interesting 21 hours of video
+- https://www.tutorialspoint.com/big_data_tutorials.htm Tutorialspoint Big Data
+- https://learn.datacamp.com/skill-tracks/big-data-with-pyspark PySpark
 - https://www.coursera.org/learn/big-data-essentials HDFS, MapReduce and Spark RDD 
-- https://www.coursera.org/search?query=big%20data& more
-- https://learn.datacamp.com/career-tracks/data-engineer-with-python for Data Enginering
-- https://learn.datacamp.com/skill-tracks/tableau-fundamentals for Data Analysis
 
 ## World of Hadoop
 1. Query engine
 2. Core Hadoop ecosystem
 3. Enternal Data Storage
     - MySQL, MongoDB, Cassandra
-
 
 <img src="img/bd_hadoop.png" width=700>
 <img src="img/hadoop.png" width=700>
@@ -45,3 +44,25 @@
 - **Flume** - web logs to cluster in real time for processing.
 - **Kafka** - collect data from cluster of pcs, web services and broadcast that to Hadoop cluster. Solves the problem of data ingestion.
 
+
+# [Mastering Big Data Analytics](https://olympus.greatlearning.in/courses/10977/pages/big-data-touch) by Great Learning
+
+- Hadoop: Master your Big Data
+- Hive: Big data SQL
+- Spark: Stream and analyze the big data
+- Apache Kafka: Distributed Streaming Platform
+- Advanced Spark
+
+## Hadoop: Master your Big Data
+
+
+## Hive: Big data SQL
+
+
+## Spark: Stream and analyze the big data
+
+
+## Apache Kafka: Distributed Streaming Platform
+
+
+## Advanced Spark
