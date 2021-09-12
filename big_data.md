@@ -181,10 +181,18 @@ $ hadoop fs -get ... ... # copy from HDFS to local
 $
 ```
 
-### Mapreduce
+### Hadoop Mapreduce
 <img src="img/bd_mapreducer.png" width=700>
 <br>
 
+### Hadoop YARN
+- Distributed data processing
+- It is the Resource manager: which is also devided into *Scheduler* and *Applications manager*
+- YARN also manages to swtich the *Standby Namnode* in case of failure of the Namenode. Also when both, active namenode and secondary name node fail, we have the secondary name node.
+
+### Hadoop 3.x 
+- Ensure encoding: Data is replicated 3 times, but in Hadoop version 3, parity bit encoding is used (parity block), only you need 50% more space. XOR logic
+- For example you have A, B, C blocks of data. You will have AB, and BC.
 
 
 ## Hive: Big data SQL
