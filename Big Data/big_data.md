@@ -1,4 +1,4 @@
-# Big Data 
+# All about Big Data 
 
     Tools: 
     Python
@@ -16,7 +16,7 @@
 - https://www.youtube.com/watch?v=DCaiZq3aBSc Hadoop
 - https://cognitiveclass.ai/learn/big-data Big data, Hadoop, Spark 
 - https://www.mygreatlearning.com/academy/courses/2618180/10977#?utm_source=share_with_friends Also interesting 21 hours of video
-- https://www.javatpoint.com/hadoop-tutorial or https://www.tutorialspoint.com/big_data_tutorials.htm articles
+- https://www.javatpoint.com/hadoop-tutorial or https://www.tutorialspoint.com/big_data_tutorials.htm tutorials about Hadoop (Hive, HDFS, MapReduce, YARN), Spark, Kafka
 - https://learn.datacamp.com/skill-tracks/big-data-with-pyspark PySpark
 - https://www.coursera.org/learn/big-data-essentials HDFS, MapReduce and Spark RDD 
 
@@ -196,6 +196,29 @@ $
 
 
 ## Hive: Big data SQL
+**What is the Apache Hive?**
+- Hive is the query interface on top of the Map Reduce. 
+- It is the data warehouse.
+- It has SQl style language (Hive Query Language)
+- HQL translated to JAR file to be execute in cluster.
+- HIVE reads data from HDFS.
+- Allows creation of tables on top of the structured data.
+- HIVE is not RDBMS
+
+**Working with Hive**
+- Table meta data is seperate from table
+- We do NOT load the data where the HIVE tables are 
+- Hive table information (meta data is saved in meta store)
+- So, we keep the table structure and the data seperate  
+
+*We are creating the table to view the already existing data from HDFS. Data should be structured. Difference between Pig and Hive is that in Hive you can query only structured data. You need to clean unstructured data before processing it in Hive. However, Pig can process both kind of data.*
+
+**Basic commands:** [Hive Code](hive_code.txt)
+
+**Internal vs External tables**
+- There could be *internal* and *external tables* created in HIVE. The data and metadata is deleted in internal and only metadata is deleted in external tables. For Internal tables, Hive stores data into its warehouse directory.
+- INTERNAL : Table is created First and Data is loaded later
+- EXTERNAL : Data is present and Table is created on top of it.
 
 
 ## Spark: Stream and analyze the big data
