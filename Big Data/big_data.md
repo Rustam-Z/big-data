@@ -108,7 +108,7 @@
 **Deployment nodes**
 - *Fully distributed mode*: each service runs on a seperate hardware. Used in production. Service means (namenode, secondary namenode, job tracker, and data node).
 - *Pseudo distributed mode*: All services run on the same machine but with a different JVM (testing)
-- *Standalon mode*: All services run on the same machine and on the one JVM. 
+- *Standalone mode*: All services run on the same machine and on the one JVM. 
 
 **Functionality of each component**
 - Master node
@@ -222,6 +222,58 @@ $
 
 
 ## Spark: Stream and analyze the big data
+*Spark* is the parallel processing framework.
+
+**Spark architecture**
+<br><img src="img/spark.png" width=700>
+<br><img src="img/spark_ex.png" width=700><img src="img/spark2.png" width=700>
+
+- DRIVER. The driver is the process where the main method runs. Job is launched fro Driver. First it converts the user program into tasks and after that it schedules the tasks on the executors. EXECUTORS. Executors are worker nodes' processes in charge of running individual tasks in a given Spark job. One executor may have many parts of the same job. Meaning that data on that data node, may be processed seperately. 
+- *Executor* is one container for one type of job. One type of job cannot have the same executor on one machine. If someone uses Worker, new executor will be created. 
+
+**Spark deployment modes**
+- Standalone (similar to Hadoop pseudo-distributed)
+- Local mode (all in one JMV)
+- Server mode (fully distributed mode)
+
+**Spark vs Hadoop**
+- SPARK wins over HADOOP because:
+    - Its fast because it’s an improved design over Hadoop framework
+    - It uses several techniques to avoid or minimize disc I/O
+    - It’s a completely in memory computing based parallel processing framework
+- ><img src="img/hadoop_ex.png" width=700>
+
+**RDDs**
+- *Resilient Distributed Dataset (RDD)* is the fundamental data structure of Spark. They are immutable Distributed collections of objects of any type. As the name suggests is a Resilient (Fault-tolerant) records of data that resides on multiple nodes.
+- They are **immmutable**, **partioned** and **distributed**
+- The data loaded into a SPARK object is called RDD.
+- 3 Basic steps for program execution: Data source --> Data loaded into spark object for manipulations --> Final result
+- <img src="img/under-the-hood.png" width=700>
+- Loading the data from hard drives to the RAM of the worker nodes is based on the data locality. Same as Hadoop, data stays on one place, only code goes there. If the data on data node, then data will be loaded on its RAM, data will not be moved. 
+- <img src="img/spark-workflow.png" width=700>
+- RDDs mostly *reside in the RAM (memory)* when the job is running.
+- Spark FAIR Scheduler used by Spark for scheduling tasks. 
+
+**Lazy evaluation**
+- Laziness means not computning transformations till it's need. 
+- Once action is performed, the evaluation starts. 
+- It helps to reduce the number of passes. 
+```
+val c1 = collection.map(value => value + 1) # do not computer anything
+val c2 = c1.map(value => value + 2) # don't compute
+print c2 # now transform into
+```
+- **Type inference** is part of compile to determine the type by operatoin
+
+**Caching**
+- Immutable data allows you to cache data for a long time. 
+- Lazy transformation allows to recreate data on failure
+- Reduce I/O operations
+
+**[Spark DataFrame basics](spark_dataframe_basics.ipynb)**
+
+**[Music data case study]()**
+
 
 
 ## Apache Kafka: Distributed Streaming Platform
