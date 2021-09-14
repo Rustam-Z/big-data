@@ -1,6 +1,6 @@
-## Music data
+## *Music Data* - Big Data Project
 
-Big data project #1
+*Building Big Data end-to-end solution from scratch*
 
 ### Agenda:
 - Problem statement

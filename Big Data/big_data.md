@@ -265,6 +265,10 @@ print c2 # now transform into
 ```
 - **Type inference** is part of compile to determine the type by operatoin
 
+**DAG optimization in Spark**
+- DAGs are used here to perform step by step transformations of data.
+- If there will be any error somewhere in between, as Spark saved other data in the memory, it can easily continue frmo this part.
+
 **Caching**
 - Immutable data allows you to cache data for a long time. 
 - Lazy transformation allows to recreate data on failure
@@ -274,6 +278,52 @@ print c2 # now transform into
 
 **[Music data case study]()**
 
+### Spark streaming and Real time data analytics
+**Use cases**
+- Real time froud detection in credit card & banking transaction
+- Digital marketing: Ads recommendation & targeting
+- Social media trends analysis (Instagram, Facebook)
+- Self driving cars
+- IOT sensors
+- HFT algorithmic trading: real time analytics on stocks and financial data
+
+**Big companies using Big data**
+- **Uber:** Uber use real time processing from billions of user's data to calculate the serge pricing in real time based on the demand. Also real time Matching prediction between customer & drivers based on ratings, and probability of cancelation. 
+
+**Challenges while working with Streaming data**
+- It requires two layers:
+    - storage layer
+    - processing layer
+- Storage layer: it needs consistency to enable fast, inexpensive, replayable reads and writes of large stream data
+- Processing layer: it is responsibe for consuming data from storage layer, processing it, and notifying storage layer to delete used data
+- Scalability, data durabulity, and fault tolerance in both the storage and processig layers. 
+
+**Stream processing in Hadoop / MR**
+- In MapReduce , multiple disk I/O are involved
+- Overhead in lounching new MR job is very high
+- It is not having Lazy evalualtion and DAG optimization 
+- It is inherently for batch processing
+- High latency (lags, takes a lot of time)
+
+**Spark streaming Architecture**
+- <img src="img/spark_streaming.png" width=700>
+- Spark Streaming **is an extension of the core Spark API** that allows data engineers and data scientists to process real-time data from various sources including (but not limited to) Kafka, Flume, and Amazon Kinesis. This processed data can be pushed out to file systems, databases, and live dashboards.
+- <img src="img/stream_ecosystem.png" width=700>
+- Full architecture: you take the input data sources (streaming and static), the next step is to apply Spark SQL to analyse the data, create the features, then you clean and preprocess the data. Then you will feed your data into MLLib to predict something. Finally, you can again save your data. 
+- <img src="img/dstreams.png" width=700>
+- Spark streaming divides a data stream into mini batches. It is not *pure real time analytics*, but near real time. Mini batches are **DStreams** (Discritized Stream). 
+- DStream is just the continious sequence of RDDs representing a continious stream of data. Can be generated from (HDFS, Kafka, Flume)
+- **Window Operation** SS offers to apply transformations over a sliding window of data.
+    - *window length* = the duration of window
+    - *sliding interval* = the interval in which the window operation is performed
+- <img src="img/window-operations.png" width=700>
+- In the image above, the operation is applied over the last 3 time units of data, also slides by 2-time units.
+- **Fault tolerance** 
+    - Master node (Driver), all executors will fail, all computations stopped. How to solve?
+    - *Dstream checkpointing*, periodically save the DAG of Dstream to fault-tolerance storage. So when something fails, we will go to the last checkpoint, and copy all the preious information, the Driver and Executors will be restarted. `ssc.checkpoint(directory)`
+    - Slave node (Executor), data on that block will be lost, and tasks restarted on block replicas. 
+- Other streaming technologies:
+    - Apache Storm: Pure real time streaming and processing. Can be used for fraud detection in credit card transaction. 
 
 
 ## Apache Kafka: Distributed Streaming Platform
