@@ -44,6 +44,7 @@
 - **Flume** - web logs to cluster in real time for processing.
 - **Apache Kafka** - collect data from cluster of pcs, web services and broadcast that to Hadoop cluster. Solves the problem of data ingestion.
 - https://www.ibm.com/cloud/blog/hadoop-vs-spark
+- **Apache ZooKeeper** coordinates with various services in a distributed environment. ... Apache Oozie is a scheduler which schedules Hadoop jobs and binds them together as one logical work.
 
 # [Mastering Big Data Analytics](https://olympus.greatlearning.in/courses/10977/pages/big-data-touch) by Great Learning
 
@@ -327,6 +328,30 @@ print c2 # now transform into
 
 
 ## Apache Kafka: Distributed Streaming Platform
+- Apache Kafka is a distributed messaging system. It is used as a message broker. Depends on Zookeeper.	
+- Apache Storm is a real-time message processing system.
+- Kafka CANNOT process streams of records! It is just for streaming the data. Streaming happens in Apache Storm and Spark Streaming.
 
+
+**Key components**
+- **Broker**: nodes, manage partitions
+- **Producers**: it writes tha data to Broker
+- **Consumers**: it consumes the data from Broker --> topic --> partition --> offset. Generally it reads the Topic.
+- **Topic**: in the same the Kafka cluster data may come from different data sources (web logs, metrics, web activities). So Topics are useful that this data (messsages) is STORED and PUBLISHED in the right place.
+- **Partitions**: Kafka topics divided into Partitions. Partitions allow you to parallelize a topic by splitting the data in a particular topic across brokers. 
+- **Offset**: Messages in the partition are assigned a unique and sequestion ID called Offset. You know the last number wuth offset. Partition offset is 100% fault tolerant.
+- **Consumer group**: What if many confsumers want to access the same thing from topic? Then they are divided into topic. 
+- **Replication**: Copying the data for preventing the data lose
+
+**Kafka API**
+- **Producer API**: stream comes, we need to *publish* it to Kafka Topic
+- **Consumer API**: allows application to *subscibe* to any Kafka Topic
+- **Streams API**: act as a stream processor, consuming an input stream from one or more topics, and producing an output stream to any topic.
+- **Connector API**: you have external DB, and you want to replicated the DB changes to Kafka topic. It is a connector which allows to connect to traditional database. 
+- <img src="img/kafka_api.png" width=700>
+
+**Zookeeper**
+- Used for managing and coordinating Kafka broker. 
+- <img src="img/kafka-how-to.png" width=700>
 
 ## Advanced Spark
