@@ -229,8 +229,8 @@ $
 <br><img src="img/spark.png" width=700>
 <br><img src="img/spark_ex.png" width=700><img src="img/spark2.png" width=700>
 
-- DRIVER. The driver is the process where the main method runs. Job is launched fro Driver. First it converts the user program into tasks and after that it schedules the tasks on the executors. EXECUTORS. Executors are worker nodes' processes in charge of running individual tasks in a given Spark job. One executor may have many parts of the same job. Meaning that data on that data node, may be processed seperately. 
-- *Executor* is one container for one type of job. One type of job cannot have the same executor on one machine. If someone uses Worker, new executor will be created. 
+- DRIVER. The driver is the process where the main method runs. Job is launched from Driver. First it converts the user program into tasks and after that it schedules the tasks on the executors. 
+- EXECUTORS. Executors are worker nodes' processes in charge of running individual tasks in a given Spark job. One executor may have many parts of the same job. Meaning that data on that data node, may be processed seperately.  *Executor* is one container for one type of job. One type of job cannot have the same executor on one machine. If someone uses Worker, new executor will be created. 
 
 **Spark deployment modes**
 - Standalone (similar to Hadoop pseudo-distributed)
@@ -355,3 +355,96 @@ print c2 # now transform into
 - <img src="img/kafka-how-to.png" width=700>
 
 ## Advanced Spark
+- Spark properties / configuration
+    - Spark properties `SparkConf`
+    - Environment variables (what is the master node, slave node, IP address, host name), `conf/spark-env.sh`
+    - Loggin `log4j.properties`
+- Performance tuning
+- Job scheduling
+
+**Spark Properties**
+```
+# By setting in the code
+val conf = new SparkConf().setMaster("local[2]").setAppName("CountingSheep")
+val sc = new SparkContest(conf)
+```
+```
+# Dynamically loading Spark Properties
+val sc = new SparkContest(new SparkConf())
+
+# Then you can supply configuration online:
+./bin/spark-submit --name "My app" --master local[4] --conf spark.eventLog.enables=false --conf "spark.executor.extraJavaOptions=-XX: +PrintGCDetails -XX: +PrintGCTimeStamp" myApp.jar
+```
+```
+# conf/spark-defaults.conf
+
+spark.master            spark://5.6.7.8:7077
+spark.executor.memory   4g
+spark.eventLog.enabled  true
+spark.serializer        org.apache.spark.serializer.KryoSerializer
+```
+
+**Environment variables**
+- `conf/spark-env.sh`
+```
+JAVA_HOME
+PYSPARK_PYTHON
+PYSPARK_DRIVER_PYTHON
+...
+SPARK_LOCAL_IP
+SPARK_PUBLIC_DBS
+```
+
+**Cofiguring logging**
+- *log4j* used for logging
+- Add `log4j.properties` file in the conf file (template located there if needed)
+- Overriding configuration directory "SPARK_HOME/conf", we can set "SPARK_CONF_DIR"
+- **Configuring HADOOP Cluster configurations**
+    - `hdfs-site.xml`, provide default behaviors for the HDFS client
+    - `core-site.xml`, which sets the dafault filesystem name
+    - common location is `/etc/hadoop/conf`
+    - to make these files visible to Spark, need to set HADOOP_CONF_DIR to $SPARK_HOME/conf/spark-env.sh pointing to the location of these files
+
+
+**Performance tuning**
+- **Data serialization**
+    - Less memory, faster operations
+    - `conf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+- **Memory tuning**
+    - the amount of memory used by your objects
+    - the cost of accessing these objects
+    - !Note: Java takes 2-5x more space than the "raw" data inside their field. 
+    - **Mermory management**
+        - Execution = memory used for computation in shuffles, joins, sorts, aggregations.
+        - Storage = storage memory refers to that used for chaching and propagating internal data across cluster.
+        - M: execution & storage place, `spark.memory.fraction`
+        - R: cached blocks never, `spark.memory.storageFraction`
+
+**Garbage collections**
+- Memory blocks in the memory, but never used
+- Ex.: In each step when we do smth over RDD we create new RDD, because they are immutable. When we do any aggregation, count, sum. 
+- Java Heap: Young and Old
+    - Young: Eden, Survivir1, Survivor2
+    - When Eden is full, minor GC is running and objects that are alive from Eden to Survivor1 then copied to Survivor2 (by swapping survivors)
+    - When Survivor2 is old enough, it is moved to Old.
+    - Finally when Old is full, then full GC invoked.
+
+*When you have out of memory error, then increase the level of parallelism. `spark.default.parallelism`*
+
+**Job scheduling**
+- Give the max number of resources the application is able to use!
+- **Modes in cluster management:**
+    - Standalone mode:
+        - FIFO (first in first out), queue
+        - Each application will try to use all available nodes
+        - Static resource sharing is used. You will set before hand, how much nodes (CPU) and Memory to use.
+        - Can limit the number of nodes by `spark.cores.max`, `spark.executor.memory`
+    - Mesos:
+        - Dynamic resource sharing. Depending on usage of application, Mesos will give more or less number of resources. 
+        - set `spark.dynamiAllocation.enabled` to true
+    - YARN:
+        - You can specify how many executors you want, and how much memory and core for each executor (executor=process inside node responsibe to run tasks of the same job).
+
+
+
+https://blog.cloudera.com/how-to-tune-your-apache-spark-jobs-part-1/
