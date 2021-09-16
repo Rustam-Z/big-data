@@ -189,7 +189,7 @@ $
 ### Hadoop YARN
 - Distributed data processing
 - It is the Resource manager: which is also devided into *Scheduler* and *Applications manager*
-- YARN also manages to swtich the *Standby Namnode* in case of failure of the Namenode. Also when both, active namenode and secondary name node fail, we have the secondary name node.
+- YARN also manages to switch the *Standby Namenode* in case of failure of the Namenode. Also when both, active namenode and secondary name node fail, we have the secondary name node.
 
 ### Hadoop 3.x 
 - Ensure encoding: Data is replicated 3 times, but in Hadoop version 3, parity bit encoding is used (parity block), only you need 50% more space. XOR logic
@@ -331,6 +331,7 @@ print c2 # now transform into
 - Apache Kafka is a distributed messaging system. It is used as a message broker. Depends on Zookeeper.	
 - Apache Storm is a real-time message processing system.
 - Kafka CANNOT process streams of records! It is just for streaming the data. Streaming happens in Apache Storm and Spark Streaming.
+- https://stackoverflow.com/questions/21808529/apache-kafka-vs-apache-storm
 
 
 **Key components**
