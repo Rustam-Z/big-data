@@ -425,7 +425,7 @@ SPARK_PUBLIC_DBS
 - Memory blocks in the memory, but never used
 - Ex.: In each step when we do smth over RDD we create new RDD, because they are immutable. When we do any aggregation, count, sum. 
 - Java Heap: Young and Old
-    - Young: Eden, Survivir1, Survivor2
+    - Young: Eden, Survivor1, Survivor2
     - When Eden is full, minor GC is running and objects that are alive from Eden to Survivor1 then copied to Survivor2 (by swapping survivors)
     - When Survivor2 is old enough, it is moved to Old.
     - Finally when Old is full, then full GC invoked.

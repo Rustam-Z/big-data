@@ -2,12 +2,13 @@ InterviewBit
 
 
 Big data:
+- https://www.interviewbit.com/big-data-interview-questions/
 - https://www.whizlabs.com/blog/big-data-interview-questions/
 - https://www.mygreatlearning.com/blog/top-hadoop-interview-questions/
 - https://www.youtube.com/watch?v=xnO1HSsdxuw
 - https://www.guru99.com/data-engineer-interview-questions.html
 - https://intellipaat.com/blog/interview-question/data-engineer-interview-questions/
-- https://www.interviewbit.com/big-data-interview-questions/
+
 
 Hadoop:
 - https://www.interviewbit.com/hadoop-interview-questions/
@@ -17,6 +18,7 @@ Spark:
 
 Python:
 - https://www.interviewbit.com/python-interview-questions/
+- https://www.edureka.co/blog/interview-questions/python-interview-questions/
 
 - Multiprocessing-and-Multithreading: 
     - In Multiprocessing, CPUs are added for increasing computing power. While In Multithreading, many threads are created of a single process for increasing computing power. ... In Multiprocessing, Many processes are executed simultaneously. While in multithreading, many threads of a process are executed simultaneously.
@@ -31,10 +33,8 @@ Python:
     - https://stackoverflow.com/questions/19928256/when-to-choose-multithreading-or-multiprocessing/19928448
 
 
-- https://www.edureka.co/blog/interview-questions/python-interview-questions/
-
 SQL:
-- https://www.w3schools.com/sql/sql_like.asp
+- https://www.w3schools.com/sql/sql_like.asp Reference
 
 - https://www.interviewbit.com/sql-interview-questions/
 
