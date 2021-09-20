@@ -42,6 +42,8 @@ Well versed in cloud technology | Clean outliers in data
 - Exploration & Visualization `Data Scientist`
 - Experimentation & Prediction `Data Scientist`
 
+<img src="img/data_workflow.gif">
+
 **Data engineer deliver:**
 - the correct data
 - in the right form
