@@ -18,7 +18,7 @@
 - https://www.mygreatlearning.com/academy/courses/2618180/10977#?utm_source=share_with_friends Also interesting 21 hours of video
 - https://www.javatpoint.com/hadoop-tutorial or https://www.tutorialspoint.com/big_data_tutorials.htm tutorials about Hadoop (Hive, HDFS, MapReduce, YARN), Spark, Kafka
 - https://learn.datacamp.com/skill-tracks/big-data-with-pyspark PySpark
-- https://www.coursera.org/learn/big-data-essentials HDFS, MapReduce and Spark RDD 
+- https://www.coursera.org/learn/big-data-essentials HDFS, MapReduce and Spark 
 
 ## World of Hadoop
 1. Query engine
@@ -248,6 +248,7 @@ $
 - *Resilient Distributed Dataset (RDD)* is the fundamental data structure of Spark. They are immutable Distributed collections of objects of any type. As the name suggests is a Resilient (Fault-tolerant) records of data that resides on multiple nodes.
 - They are **immmutable**, **partioned** and **distributed**
 - The data loaded into a SPARK object is called RDD.
+- Spark is a cluster computation engine, it does not replicates data or stored data implicitly. Spark processing is based on rdd, if due to node failure any of the data partition is lost it can be recalculated using DAG.
 - 3 Basic steps for program execution: Data source --> Data loaded into spark object for manipulations --> Final result
 - <img src="img/under-the-hood.png" width=700>
 - Loading the data from hard drives to the RAM of the worker nodes is based on the data locality. Same as Hadoop, data stays on one place, only code goes there. If the data on data node, then data will be loaded on its RAM, data will not be moved. 
