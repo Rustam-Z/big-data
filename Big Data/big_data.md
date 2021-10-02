@@ -1,72 +1,100 @@
 # All about Big Data 
 
-    Tools: 
-    Python
-    Java
-    Apache Hadoop
-    Apache Hadoop HDFS
-    Apache Hadoop YARN
-    Apache Spark
-    Apache Hadoop MapReduce
-    Spark Streaming
-    Apache Kafka
-    SQL
+> Here you will find general information about big data, big data tools, and big data theory.
 
-## How to learn:
-- https://www.youtube.com/watch?v=DCaiZq3aBSc Hadoop
-- https://cognitiveclass.ai/learn/big-data Big data, Hadoop, Spark 
-- https://www.mygreatlearning.com/academy/courses/2618180/10977#?utm_source=share_with_friends Also interesting 21 hours of video
-- https://www.javatpoint.com/hadoop-tutorial or https://www.tutorialspoint.com/big_data_tutorials.htm tutorials about Hadoop (Hive, HDFS, MapReduce, YARN), Spark, Kafka
-- https://learn.datacamp.com/skill-tracks/big-data-with-pyspark PySpark
-- https://www.coursera.org/learn/big-data-essentials HDFS, MapReduce and Spark 
+<!-- 
+Python
+Java
+Apache Hadoop
+Apache Hadoop HDFS
+Apache Hadoop YARN
+Apache Spark
+Apache Hadoop MapReduce
+Spark Streaming
+Apache Kafka
+SQL 
+NoSQL
+Docker
+Kubernetes
+Linux
+Networking
+-->
 
-## World of Hadoop
-1. Query engine
-2. Core Hadoop ecosystem
-3. Enternal Data Storage
-    - MySQL, MongoDB, Cassandra
+## Table of contents:
+- [BD resources](#resources)
+- [BD tools](#big-data-tools)
+- [BD Introduction](#big-data-introduction)
+- [Hadoop](#hadoop)
+- [Hive: Big data SQL](#hive-big-data-sql)
+- [Spark: Stream and analyze the big data](#spark-stream-and-analyze-the-big-data)
+- [Kafka: Distributed Streaming Platform](#apache-kafka-distributed-streaming-platform)
+- [Advanced Spark](#advanced-spark)
 
+
+## Resources
+- [Hadoop ecosystem explained in 20 min](https://www.youtube.com/watch?v=DCaiZq3aBSc)
+- [Big Data University, cognitiveclass.ai](https://cognitiveclass.ai/learn/big-data) `Big data, Hadoop, Spark`
+- [Mastering Big Data Analytics, mygreatlearning.com](https://www.mygreatlearning.com/academy/courses/2618180/10977#?utm_source=share_with_friends) `21 hours`
+- https://www.javatpoint.com/hadoop-tutorial
+- https://www.tutorialspoint.com/big_data_tutorials.htm
+- https://www.coursera.org/learn/big-data-essentials `HDFS, MapReduce and Spark RDD`
+- Articles: mckinsey.com, gartner.com
+
+
+## Big Data tools
 <img src="img/bd_hadoop.png" width=700>
 <img src="img/hadoop.png" width=700>
 
-### **Core Hadoop ecosystem**
-- **HDFS** = Hadoop distributes file system, data storage (distributed) part of Hadoop.
+- **HDFS** = Hadoop distributes file system, stores data for many different locations, creating a centralized place to store and process the data.
 - **Hadoop YARN** = Yet another resource negotiator, YARN is a resource allocator which allocates resources to run your jobs. Manages the resources on the computing cluster, knows what nodes are available, heartbeat which keeps the cluster going. YARN in a nut shell has a master (Resource Manager = job tracker) and workers (Node manager = task tracker).
 - **Hadoop MapReduce**, programming model which allows us to process the data across the cluster. *Maps* transform the data in parallel across the cluster, *reducers* aggregate the data together.
-- **Apache Pig** - no need to write Python, Java code, high level API with SQL-like syntasis.
+- **Apache Pig** - no need to write Python, Java code, high level API with SQL-like syntaxes.
 - **Apache Hive** - Apache Hive is a data warehouse software project built on top of Apache Hadoop for providing data query and analysis. Hive gives an SQL-like interface to query data stored in various databases and file systems that integrate with Hadoop. Used mostly to make an analysis or report. 
 - **Ambari** - sits on top of everything, tell info about cluster, and visualize a cluster, how much resources I am using. Apache Ambari simplifies the management and monitoring of an Apache Hadoop cluster. 
-- **Apache Spark** - alternative of MapReduce, very fast and effective, can handle SQL queries, handle streaming the data. Spark's data processing speeds are up to 100x faster than MapReduce. Because Spark processes and retains data in memory for subsequent steps.
+- **Apache Spark** - alternative of MapReduce, very fast and effective, can handle SQL queries, handle streaming the data. Spark's data processing speeds are up to 100x faster than MapReduce. Because Spark processes and retains data in memory for subsequent steps. https://www.ibm.com/cloud/blog/hadoop-vs-spark
+
 - **Apache HBase** - Apache HBase is a NoSQL key/value store which runs on top of HDFS.
 - **Apache Storm** - working with the (streamed) data on real time (not a batch), data may come from sensors maybe.
 - **OOZIE** - workflow scheduling system to manage Hadoop jobs. It is like a CRON or AirFlow. Oozie submit the job to yarn and yarn executes the job. Yarn give and manage resources to run those jobs and it does that for not only oozie jobs but many other things. 
 - **Sqoop** - data ingestion from external resources to HDFS for example. A connector between Hadoop and legacy data systems.
 - **Flume** - web logs to cluster in real time for processing.
 - **Apache Kafka** - collect data from cluster of pcs, web services and broadcast that to Hadoop cluster. Solves the problem of data ingestion.
-- https://www.ibm.com/cloud/blog/hadoop-vs-spark
 - **Apache ZooKeeper** coordinates with various services in a distributed environment. ... Apache Oozie is a scheduler which schedules Hadoop jobs and binds them together as one logical work.
 
-# [Mastering Big Data Analytics](https://olympus.greatlearning.in/courses/10977/pages/big-data-touch) by Great Learning
 
-- Hadoop: Master your Big Data
-- Hive: Big data SQL
-- Spark: Stream and analyze the big data
-- Apache Kafka: Distributed Streaming Platform
-- Advanced Spark
+## Big Data Introduction
+### What is the Big Data?
+- Big data a massive volume of both structured and unstructured data which is very large and complex to process using traditional database and software techniques.
+- Big data is the digital trace. This digital trace is made up of all the data that is captured when we use digital technology.
+- Big Data refers to the dynamic, large and disparate volumes of data being created by people, tools and machines.
+It requires new, innovative, and scalable technology to collect, host and analytically process the vast amount of data gathered in order to derive real-time business insights that relate to consumers, risk, profit, performance, productivity management and enhanced shareholder value.
+- [Essay: Big Data and Business Analytics comes of age](https://courses.cognitiveclass.ai/assets/courseware/v1/fe15ab4775a3befa96a1e39519d236d1/asset-v1:BigDataUniversity+BD0101EN+2016_T2+type@asset+block/Reading_1_Big_Data_and_Business_Analytics_comes_of_age_Oct_2011.pdf)
+- **BD skills**: discover and analyse the trends in big data
 
-## Hadoop: Master your Big Data
-### Big data touch
-- **Big data** a massive volume of both structured and unstructured data which is very large and complex to process using traditional database and software techniques.
+### 5 v's of BD
+- **Velocity** is the speed of the data,
+or the speed at which data accumulates.
+- **Volume** is the scale of the data,
+or the increase in the amount of data stored.
+- **Variety** is the diversity of the data. We have structured data that fits neatly into rows and columns, or relational databases and unstructured data that is not organized in a pre-defined way, for example Tweets, blog posts, pictures, numbers, and even video data.
+- **Veracity** is the conformity to facts and accuracy. Quality and origin of data. Is the information real, or is it false?
+- **Value** is our ability to turn the data into value (profit, social benefit, customer / employee satisfaction). The goal of BD is to derive the value from data.
+
+### Types of data and use cases of BD
+- Gigabyte -> Terabyte -> Petabyte -> Exabyte -> Zettabyte -> Yottabyte 
 - Semi-structured and unstructured data can be:
-    - Human generated data: blogs, reviews, emails, pictures, (facebook, linkedin, twitter)
-    - Machine generated data: Internet clickstream records, web server logs, IoT sensor data, images / video (video surveillance, satellite images)
+    - Human generated data: blogs, reviews, emails, pictures, (Facebook, LinkedIn, Twitter)
+    - Machine generated data: Internet click stream records, web server logs, IoT sensor data, images / video (video surveillance, satellite images)
+    - Business generated data: 
 - Why big data become popular?
     - 90% of all data created just in the last 2 years.
     - 80% of data is unstructured, so difficult to analyze.
     - Limitation in processing of in handling large structured data.
-- Cases for BD:
-    - Financial services:
-        - Detect froud
+- Use cases for BD:
+    - Smarter Traffic system to predict and improve traffic flow
+        - Analyzed streaming real-time data gathered from cameras at entry / exit to city, GPS data from taxis and trucks, and weather information
+    - Financial services
+        - Detect fraud
         - Model and manage risk
         - Improve dept recovery rates
         - Personalize banking / insurance products
@@ -81,8 +109,17 @@
         - Price comparison services
     - And many ...
 
+
+## Hadoop
 ### Getting started: Hadoop
-- **What is the Hadoop?** Apache Hadoop is a collection of open-source software utilities that facilitates using a network of many computers to solve problems involving massive amounts of data and computation. It provides a software framework for distributed storage and processing of big data using the MapReduce programming model.
+- **What is the Hadoop?** Apache Hadoop is a collection of open-source software utilities that facilitates using a network of many computers to solve problems involving massive amounts of data and computation. It provides a software framework for distributed storage and processing of big data using the MapReduce programming model. (Storing and processing huge amount of data)
+- Specialized modules:
+    - Storage, HDFS
+    - Resource management and scheduling for computational tasks, YARN
+    - Distributed computing, MapReduce
+- **Data lake** is a vast pool of raw data, the purpose for which is not yet defined.
+- **Data warehouse** is a repository for structured, filtered data that has already been processed for a specific purpose. Deliver deep insight with advance in-database analytics, OLAP.
+- **Pre-processing** (irrelevant, relevant data) before moving to DW, **offloading** moving infrequently accessed data from Data Warehouses into enterprise grade Hadoop. **Exploration**, using big data capabilities to explore and discover new high value data from massive amounts
 
 ### Hadoop framework: Stepping into Hadoop
 - Hadoop 1.0
@@ -92,10 +129,10 @@
 
 **Key words (for Hadoop)**
 - Commodity hardware: PCs that can be used to make a cluster
-- Cluster / grid: Interconnection of systems in a network.
 - Node: A single instance of a computer
-- Distributed systems: A system composed to multiple autonomous computers that communicate through a computer network.
-- ASF = Apache Software Foundation
+- Rack: A collection of 40-50 nodes that are physically stored close together
+- Cluster: Interconnection of systems in a network, collection of racks
+- Distributed systems: A system composed to multiple autonomous computers that communicate through a computer network
 - HA: high availability
 - Hot standby: uninterrupted failover. Hot standby is normally available to the users within minutes of a disaster situation.
 
@@ -107,27 +144,26 @@
 - Moreover, they are not connected via wifi, but via cables (optical). Together they make the cluster. 
 
 **Deployment nodes**
-- *Fully distributed mode*: each service runs on a seperate hardware. Used in production. Service means (namenode, secondary namenode, job tracker, and data node).
+- *Fully distributed mode*: each service runs on a separate hardware. Used in production. Service means (namenode, secondary namenode, job tracker, and data node).
 - *Pseudo distributed mode*: All services run on the same machine but with a different JVM (testing)
 - *Standalone mode*: All services run on the same machine and on the one JVM. 
 
 **Functionality of each component**
 - Master node
-    - Namenode = central file system manager, the centralpice of HDFS
+    - Namenode = central file system manager, the central piece of HDFS
     - Secondary namenode = data backup of name node (not a hot standby), kind of checkpoint.
     - Job tracker: Centralized job scheduler
 - Slave nodes
     - Data nodes: machines where the data gets stored and processed. All big data processing happens on the data node.
-    - Task tracker: track the activiteies happing on the data node, and report it to job tracker. Each data node has its task tracker.
+    - Task tracker: track the activities happing on the data node, and report it to job tracker. Each data node has its task tracker.
 - Note: Every slave node keeps sending a heart beat signal to the name node once every 3 seconds to state that they are alive. What happens is when the data node goes down?
 
-**NOTES**
+**EXTRA NOTES**
 - [Are Secondary NameNode and Standby node mean the same thing?](https://community.cloudera.com/t5/Support-Questions/Are-Secondary-NameNode-and-Standby-node-mean-the-same-thing/td-p/221582)
 There are two different concepts. HDFS can be deployed in two modes. 1) Without HA 2) With HA.
 In without HA mode, HDFS will have Namenode and Secondary Namenode. Here, secondary namenode periodically take snapshot of namenode and keep the metadata (fsimage) and audit logs up to date. So in case of Namenode failure, Secondary Namenode will have copy of latest namenode activity and prevent data loss. 
 In HA mode, HDFS have two set of Namenodes. One acts as active namenode and another acts as Standby Namenode. The duties of standby namenode is similar to Secondary namenode where it keeps the track of active namenode activity and take snapshot periodically. Here, in case of active namenode failure, standby namenode automatically takes the control and becomes active. This way user will not notice the failure in namenode. This way High availability is guaranteed.
 - Secondary NameNode is not required in HA configuration because the Standby node also performs the tasks of the Secondary NameNode
-
 
 **What is the job in Hadoop eco system?**
 - A job is a *task* submitted to the cluster by the user
@@ -182,13 +218,13 @@ $ hadoop fs -get ... ... # copy from HDFS to local
 $
 ```
 
-### Hadoop Mapreduce
+### Hadoop MapReduce
 <img src="img/bd_mapreducer.png" width=700>
 <br>
 
 ### Hadoop YARN
 - Distributed data processing
-- It is the Resource manager: which is also devided into *Scheduler* and *Applications manager*
+- It is the Resource manager: which is also divided into *Scheduler* and *Applications manager*
 - YARN also manages to switch the *Standby Namenode* in case of failure of the Namenode. Also when both, active namenode and secondary name node fail, we have the secondary name node.
 
 ### Hadoop 3.x 
@@ -207,10 +243,10 @@ $
 - HIVE is not RDBMS
 
 **Working with Hive**
-- Table meta data is seperate from table
+- Table meta data is separate from table
 - We do NOT load the data where the HIVE tables are 
 - Hive table information (meta data is saved in meta store)
-- So, we keep the table structure and the data seperate  
+- So, we keep the table structure and the data separate  
 
 *We are creating the table to view the already existing data from HDFS. Data should be structured. Difference between Pig and Hive is that in Hive you can query only structured data. You need to clean unstructured data before processing it in Hive. However, Pig can process both kind of data.*
 
@@ -230,7 +266,7 @@ $
 <br><img src="img/spark_ex.png" width=700><img src="img/spark2.png" width=700>
 
 - DRIVER. The driver is the process where the main method runs. Job is launched from Driver. First it converts the user program into tasks and after that it schedules the tasks on the executors. 
-- EXECUTORS. Executors are worker nodes' processes in charge of running individual tasks in a given Spark job. One executor may have many parts of the same job. Meaning that data on that data node, may be processed seperately.  *Executor* is one container for one type of job. One type of job cannot have the same executor on one machine. If someone uses Worker, new executor will be created. 
+- EXECUTORS. Executors are worker nodes' processes in charge of running individual tasks in a given Spark job. One executor may have many parts of the same job. Meaning that data on that data node, may be processed separately.  *Executor* is one container for one type of job. One type of job cannot have the same executor on one machine. If someone uses Worker, new executor will be created. 
 
 **Spark deployment modes**
 - Standalone (similar to Hadoop pseudo-distributed)
@@ -246,7 +282,7 @@ $
 
 **RDDs**
 - *Resilient Distributed Dataset (RDD)* is the fundamental data structure of Spark. They are immutable Distributed collections of objects of any type. As the name suggests is a Resilient (Fault-tolerant) records of data that resides on multiple nodes.
-- They are **immmutable**, **partioned** and **distributed**
+- They are **immutable**, **partitioned** and **distributed**
 - The data loaded into a SPARK object is called RDD.
 - Spark is a cluster computation engine, it does not replicates data or stored data implicitly. Spark processing is based on rdd, if due to node failure any of the data partition is lost it can be recalculated using DAG.
 - 3 Basic steps for program execution: Data source --> Data loaded into spark object for manipulations --> Final result
@@ -257,7 +293,7 @@ $
 - Spark FAIR Scheduler used by Spark for scheduling tasks. 
 
 **Lazy evaluation**
-- Laziness means not computning transformations till it's need. 
+- Laziness means not computing transformations till it's need. 
 - Once action is performed, the evaluation starts. 
 - It helps to reduce the number of passes. 
 ```
@@ -265,11 +301,11 @@ val c1 = collection.map(value => value + 1) # do not computer anything
 val c2 = c1.map(value => value + 2) # don't compute
 print c2 # now transform into
 ```
-- **Type inference** is part of compile to determine the type by operatoin
+- **Type inference** is part of compile to determine the type by operation
 
 **DAG optimization in Spark**
 - DAGs are used here to perform step by step transformations of data.
-- If there will be any error somewhere in between, as Spark saved other data in the memory, it can easily continue frmo this part.
+- If there will be any error somewhere in between, as Spark saved other data in the memory, it can easily continue from this part.
 
 **Caching**
 - Immutable data allows you to cache data for a long time. 
@@ -282,7 +318,7 @@ print c2 # now transform into
 
 ### Spark streaming and Real time data analytics
 **Use cases**
-- Real time froud detection in credit card & banking transaction
+- Real time fraud detection in credit card & banking transaction
 - Digital marketing: Ads recommendation & targeting
 - Social media trends analysis (Instagram, Facebook)
 - Self driving cars
@@ -290,20 +326,20 @@ print c2 # now transform into
 - HFT algorithmic trading: real time analytics on stocks and financial data
 
 **Big companies using Big data**
-- **Uber:** Uber use real time processing from billions of user's data to calculate the serge pricing in real time based on the demand. Also real time Matching prediction between customer & drivers based on ratings, and probability of cancelation. 
+- **Uber:** Uber use real time processing from billions of user's data to calculate the serge pricing in real time based on the demand. Also real time Matching prediction between customer & drivers based on ratings, and probability of cancellation. 
 
 **Challenges while working with Streaming data**
 - It requires two layers:
     - storage layer
     - processing layer
-- Storage layer: it needs consistency to enable fast, inexpensive, replayable reads and writes of large stream data
-- Processing layer: it is responsibe for consuming data from storage layer, processing it, and notifying storage layer to delete used data
-- Scalability, data durabulity, and fault tolerance in both the storage and processig layers. 
+- Storage layer: it needs consistency to enable fast, inexpensive, repayable reads and writes of large stream data
+- Processing layer: it is responsible for consuming data from storage layer, processing it, and notifying storage layer to delete used data
+- Scalability, data durability, and fault tolerance in both the storage and processing layers. 
 
 **Stream processing in Hadoop / MR**
 - In MapReduce , multiple disk I/O are involved
-- Overhead in lounching new MR job is very high
-- It is not having Lazy evalualtion and DAG optimization 
+- Overhead in launching new MR job is very high
+- It is not having Lazy evaluation and DAG optimization 
 - It is inherently for batch processing
 - High latency (lags, takes a lot of time)
 
@@ -314,7 +350,7 @@ print c2 # now transform into
 - Full architecture: you take the input data sources (streaming and static), the next step is to apply Spark SQL to analyse the data, create the features, then you clean and preprocess the data. Then you will feed your data into MLLib to predict something. Finally, you can again save your data. 
 - <img src="img/dstreams.png" width=700>
 - Spark streaming divides a data stream into mini batches. It is not *pure real time analytics*, but near real time. Mini batches are **DStreams** (Discritized Stream). 
-- DStream is just the continious sequence of RDDs representing a continious stream of data. Can be generated from (HDFS, Kafka, Flume)
+- DStream is just the continuous sequence of RDDs representing a continuous stream of data. Can be generated from (HDFS, Kafka, Flume)
 - **Window Operation** SS offers to apply transformations over a sliding window of data.
     - *window length* = the duration of window
     - *sliding interval* = the interval in which the window operation is performed
@@ -322,7 +358,7 @@ print c2 # now transform into
 - In the image above, the operation is applied over the last 3 time units of data, also slides by 2-time units.
 - **Fault tolerance** 
     - Master node (Driver), all executors will fail, all computations stopped. How to solve?
-    - *Dstream checkpointing*, periodically save the DAG of Dstream to fault-tolerance storage. So when something fails, we will go to the last checkpoint, and copy all the preious information, the Driver and Executors will be restarted. `ssc.checkpoint(directory)`
+    - *Dstream checkpointing*, periodically save the DAG of Dstream to fault-tolerance storage. So when something fails, we will go to the last checkpoint, and copy all the previous information, the Driver and Executors will be restarted. `ssc.checkpoint(directory)`
     - Slave node (Executor), data on that block will be lost, and tasks restarted on block replicas. 
 - Other streaming technologies:
     - Apache Storm: Pure real time streaming and processing. Can be used for fraud detection in credit card transaction. 
@@ -334,15 +370,14 @@ print c2 # now transform into
 - Kafka CANNOT process streams of records! It is just for streaming the data. Streaming happens in Apache Storm and Spark Streaming.
 - https://stackoverflow.com/questions/21808529/apache-kafka-vs-apache-storm
 
-
 **Key components**
 - **Broker**: nodes, manage partitions
 - **Producers**: it writes tha data to Broker
 - **Consumers**: it consumes the data from Broker --> topic --> partition --> offset. Generally it reads the Topic.
-- **Topic**: in the same the Kafka cluster data may come from different data sources (web logs, metrics, web activities). So Topics are useful that this data (messsages) is STORED and PUBLISHED in the right place.
+- **Topic**: in the same the Kafka cluster data may come from different data sources (web logs, metrics, web activities). So Topics are useful that this data (messages) is STORED and PUBLISHED in the right place.
 - **Partitions**: Kafka topics divided into Partitions. Partitions allow you to parallelize a topic by splitting the data in a particular topic across brokers. 
-- **Offset**: Messages in the partition are assigned a unique and sequestion ID called Offset. You know the last number wuth offset. Partition offset is 100% fault tolerant.
-- **Consumer group**: What if many confsumers want to access the same thing from topic? Then they are divided into topic. 
+- **Offset**: Messages in the partition are assigned a unique and sequential ID called Offset. You know the last number with offset. Partition offset is 100% fault tolerant.
+- **Consumer group**: What if many consumers want to access the same thing from topic? Then they are divided into topic. 
 - **Replication**: Copying the data for preventing the data lose
 
 **Kafka API**
@@ -356,11 +391,12 @@ print c2 # now transform into
 - Used for managing and coordinating Kafka broker. 
 - <img src="img/kafka-how-to.png" width=700>
 
+
 ## Advanced Spark
 - Spark properties / configuration
     - Spark properties `SparkConf`
     - Environment variables (what is the master node, slave node, IP address, host name), `conf/spark-env.sh`
-    - Loggin `log4j.properties`
+    - Logging `log4j.properties`
 - Performance tuning
 - Job scheduling
 
@@ -397,16 +433,15 @@ SPARK_LOCAL_IP
 SPARK_PUBLIC_DBS
 ```
 
-**Cofiguring logging**
+**Configuring logging**
 - *log4j* used for logging
 - Add `log4j.properties` file in the conf file (template located there if needed)
 - Overriding configuration directory "SPARK_HOME/conf", we can set "SPARK_CONF_DIR"
 - **Configuring HADOOP Cluster configurations**
     - `hdfs-site.xml`, provide default behaviors for the HDFS client
-    - `core-site.xml`, which sets the dafault filesystem name
+    - `core-site.xml`, which sets the default filesystem name
     - common location is `/etc/hadoop/conf`
     - to make these files visible to Spark, need to set HADOOP_CONF_DIR to $SPARK_HOME/conf/spark-env.sh pointing to the location of these files
-
 
 **Performance tuning**
 - **Data serialization**
@@ -416,9 +451,9 @@ SPARK_PUBLIC_DBS
     - the amount of memory used by your objects
     - the cost of accessing these objects
     - !Note: Java takes 2-5x more space than the "raw" data inside their field. 
-    - **Mermory management**
+    - **Memory management**
         - Execution = memory used for computation in shuffles, joins, sorts, aggregations.
-        - Storage = storage memory refers to that used for chaching and propagating internal data across cluster.
+        - Storage = storage memory refers to that used for caching and propagating internal data across cluster.
         - M: execution & storage place, `spark.memory.fraction`
         - R: cached blocks never, `spark.memory.storageFraction`
 
@@ -445,8 +480,6 @@ SPARK_PUBLIC_DBS
         - Dynamic resource sharing. Depending on usage of application, Mesos will give more or less number of resources. 
         - set `spark.dynamiAllocation.enabled` to true
     - YARN:
-        - You can specify how many executors you want, and how much memory and core for each executor (executor=process inside node responsibe to run tasks of the same job).
-
-
+        - You can specify how many executors you want, and how much memory and core for each executor (executor=process inside node responsible to run tasks of the same job).
 
 https://blog.cloudera.com/how-to-tune-your-apache-spark-jobs-part-1/
