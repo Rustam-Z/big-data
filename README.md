@@ -11,7 +11,7 @@ How to learn: google it, books, youtube, linkedin learning
 Websites: cognitiveclass, mygreatlearning, coursera, datacamp, linkedin, orelly
 -->
   
-    Tech: Python, SQL, NoSQL, Cloud (AWS), Docker (Kubernetes), Bash
+    Tech: Python, SQL, NoSQL, Cloud (AWS), Docker (Kubernetes), Linux Bash, Networking
 
     Big data: Hadoop (HDFS, YARN), Spark (Streaming), Kafka, Hive, Airflow
 
