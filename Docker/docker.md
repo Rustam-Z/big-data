@@ -7,6 +7,7 @@
 
 ### Key Concepts
 - What is the Docker? Docker is a tool which is used to automate the deployment of applications in lightweight containers so that applications can work in different environments.
+- In short, Docker enables users to bundle an application together with its preferred execution environment to be executed on a target machine
 - Dockerfiles are small programs designed to describe how to build a Docker image.
 - What is Docker Image? The Docker Image is a set of files and a combination of parameters will which allow creating the application instances and run them in separate containers
     - The template with instructions which is used to for creating Docker Containers

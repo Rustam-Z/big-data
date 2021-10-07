@@ -21,9 +21,9 @@ Networking
 -->
 
 ## Table of contents:
-- [BD resources](#resources)
-- [BD tools](#big-data-tools)
-- [BD Introduction](#big-data-introduction)
+- [Resources](#resources)
+- [Big Data tools](#big-data-tools)
+- [Big Data](#big-data)
 - [Hadoop](#hadoop)
 - [Hive: Big data SQL](#hive-big-data-sql)
 - [Spark: Stream and analyze the big data](#spark-stream-and-analyze-the-big-data)
@@ -49,20 +49,22 @@ Networking
 - **Hadoop YARN** = Yet another resource negotiator, YARN is a resource allocator which allocates resources to run your jobs. Manages the resources on the computing cluster, knows what nodes are available, heartbeat which keeps the cluster going. YARN in a nut shell has a master (Resource Manager = job tracker) and workers (Node manager = task tracker).
 - **Hadoop MapReduce**, programming model which allows us to process the data across the cluster. *Maps* transform the data in parallel across the cluster, *reducers* aggregate the data together.
 - **Apache Pig** - no need to write Python, Java code, high level API with SQL-like syntaxes.
-- **Apache Hive** - Apache Hive is a data warehouse software project built on top of Apache Hadoop for providing data query and analysis. Hive gives an SQL-like interface to query data stored in various databases and file systems that integrate with Hadoop. Used mostly to make an analysis or report. 
-- **Ambari** - sits on top of everything, tell info about cluster, and visualize a cluster, how much resources I am using. Apache Ambari simplifies the management and monitoring of an Apache Hadoop cluster. 
-- **Apache Spark** - alternative of MapReduce, very fast and effective, can handle SQL queries, handle streaming the data. Spark's data processing speeds are up to 100x faster than MapReduce. Because Spark processes and retains data in memory for subsequent steps. https://www.ibm.com/cloud/blog/hadoop-vs-spark
+- **Apache Hive** - `SQL query` Apache Hive is a data warehouse software project built on top of Apache Hadoop for providing data query and analysis. Hive gives an SQL-like interface to query data stored in various databases and file systems that integrate with Hadoop. Used mostly to make an analysis or report. 
+- **Ambari** - `Management and Monitoring`, sits on top of everything, tells info about Hadoop cluster, and visualize a cluster, how much resources I am using. Apache Ambari simplifies the management and monitoring of an Apache Hadoop cluster. 
+- **Apache Spark** -  general framework for distributed computing that offers high performance for both batch and interactive processing, "alternative of MapReduce", very fast and effective, can handle SQL queries, handle streaming the data. Spark's data processing speeds are up to 100x faster than MapReduce. Because Spark processes and retains data in memory for subsequent steps. https://www.ibm.com/cloud/blog/hadoop-vs-spark
 
 - **Apache HBase** - Apache HBase is a NoSQL key/value store which runs on top of HDFS.
 - **Apache Storm** - working with the (streamed) data on real time (not a batch), data may come from sensors maybe.
-- **OOZIE** - workflow scheduling system to manage Hadoop jobs. It is like a CRON or AirFlow. Oozie submit the job to yarn and yarn executes the job. Yarn give and manage resources to run those jobs and it does that for not only oozie jobs but many other things. 
-- **Sqoop** - data ingestion from external resources to HDFS for example. A connector between Hadoop and legacy data systems.
-- **Flume** - web logs to cluster in real time for processing.
+- **Apache Oozie** `Work flow` Oozie is a scheduler which schedules Hadoop jobs and binds them together as one logical work. Oozie submit the job to yarn and yarn executes the job. Yarn give and manage resources to run those jobs and it does that for not only Oozie jobs but many other things. 
+
+- **Sqoop** - `data collection` from external resources to HDFS for example. It is manually used for importing and exporting data. Specifically, it can import data from external sources into related Hadoop components like HDFS, Hbase or Hive, and export data from Hadoop to other external sources. Sqoop supports such relational databases as Oracle, Netezza and MySQL.
+- **Flume** - `data collection`, web logs to cluster in real time for processing.
+
 - **Apache Kafka** - collect data from cluster of pcs, web services and broadcast that to Hadoop cluster. Solves the problem of data ingestion.
-- **Apache ZooKeeper** coordinates with various services in a distributed environment. ... Apache Oozie is a scheduler which schedules Hadoop jobs and binds them together as one logical work.
+- **Apache ZooKeeper** `Coordination` Zookeeper is used for a cluster node configuration. It is a centralized service in Hadoop, which maintains configuration information, naming as provide distributed synchronization. Additionally, it provides group services, manages and coordinates a large cluster of machines. 
 
 
-## Big Data Introduction
+## Big Data
 ### What is the Big Data?
 - Big data a massive volume of both structured and unstructured data which is very large and complex to process using traditional database and software techniques.
 - Big data is the digital trace. This digital trace is made up of all the data that is captured when we use digital technology.
@@ -120,6 +122,13 @@ or the increase in the amount of data stored.
 - **Data lake** is a vast pool of raw data, the purpose for which is not yet defined.
 - **Data warehouse** is a repository for structured, filtered data that has already been processed for a specific purpose. Deliver deep insight with advance in-database analytics, OLAP.
 - **Pre-processing** (irrelevant, relevant data) before moving to DW, **offloading** moving infrequently accessed data from Data Warehouses into enterprise grade Hadoop. **Exploration**, using big data capabilities to explore and discover new high value data from massive amounts
+- Pros: scalability, flexibility and fault-tolerance
+
+#### Hadoop difference
+- RDBMS provides **vertical scalability**, which is also called "Scaling Up" a machine, which means you can add more resources or hardware, such as memory or CPU, to a machine in the computer cluster. While Hadoop provides **horizontal scalability**, which is known as "Scaling Out" a machine and means adding more machines to the existing computer clusters as a result of which Hadoop becomes a fault-tolerant.
+    - Vertical: more CPU & Memory
+    - Horizontal: more VMs - machines
+
 
 ### Hadoop framework: Stepping into Hadoop
 - Hadoop 1.0
@@ -133,8 +142,9 @@ or the increase in the amount of data stored.
 - Rack: A collection of 40-50 nodes that are physically stored close together
 - Cluster: Interconnection of systems in a network, collection of racks
 - Distributed systems: A system composed to multiple autonomous computers that communicate through a computer network
-- HA: high availability
+- HA: high availability, ensures the availability of the Hadoop cluster without any downtime, even in unfavorable conditions like NameNode failure, DataNode failure, machine crash, etc. It means if the machine crashes, data will be a*ccessible from another path*.
 - Hot standby: uninterrupted failover. Hot standby is normally available to the users within minutes of a disaster situation.
+- Block: 128MB, the partition of big file distributed among data nodes
 
 **Master-Slave Architecture**
 - Machines in a master mode:
@@ -150,20 +160,25 @@ or the increase in the amount of data stored.
 
 **Functionality of each component**
 - Master node
-    - Namenode = central file system manager, the central piece of HDFS
-    - Secondary namenode = data backup of name node (not a hot standby), kind of checkpoint.
-    - Job tracker: Centralized job scheduler
+    - **Namenode** = central file system manager, the central piece of HDFS, client applications communicate to the NameNode at any time they need to locate a file, or when the file should be added, copied, moved or deleted.
+    - **Secondary namenode** = data backup of name node (not a hot standby), kind of checkpoint.
+    - **Job tracker**: Centralized job scheduler
 - Slave nodes
-    - Data nodes: machines where the data gets stored and processed. All big data processing happens on the data node.
-    - Task tracker: track the activities happing on the data node, and report it to job tracker. Each data node has its task tracker.
-- Note: Every slave node keeps sending a heart beat signal to the name node once every 3 seconds to state that they are alive. What happens is when the data node goes down?
+    - **Data nodes**: machines where the data gets stored and processed. All big data processing happens on the data node. It can perform jobs like semantic and language analysis, statistics and machine learning tasks, and also jobs like clustering, data import, data export, search, decompression and indexing.
+    - **Task tracker**: track the activities happing on the data node, and report it to job tracker. Each data node has its task tracker.
+- **Note!** Every slave node keeps sending a heart beat signal to the name node once every 3 seconds to state that they are alive. What happens is when the data node goes down?
 
-**EXTRA NOTES**
+**Extra Notes**
 - [Are Secondary NameNode and Standby node mean the same thing?](https://community.cloudera.com/t5/Support-Questions/Are-Secondary-NameNode-and-Standby-node-mean-the-same-thing/td-p/221582)
 There are two different concepts. HDFS can be deployed in two modes. 1) Without HA 2) With HA.
 In without HA mode, HDFS will have Namenode and Secondary Namenode. Here, secondary namenode periodically take snapshot of namenode and keep the metadata (fsimage) and audit logs up to date. So in case of Namenode failure, Secondary Namenode will have copy of latest namenode activity and prevent data loss. 
 In HA mode, HDFS have two set of Namenodes. One acts as active namenode and another acts as Standby Namenode. The duties of standby namenode is similar to Secondary namenode where it keeps the track of active namenode activity and take snapshot periodically. Here, in case of active namenode failure, standby namenode automatically takes the control and becomes active. This way user will not notice the failure in namenode. This way High availability is guaranteed.
 - Secondary NameNode is not required in HA configuration because the Standby node also performs the tasks of the Secondary NameNode
+- **FSimage**. 
+It is a file on Name Node’s Local File System, containing entire HDFS file system namespace (including mapping of blocks to files and file system properties). Details about the *location* of the data on the Data Blocks and which blocks are stored on which node.
+- **Editlog**.
+Transaction Log is kept on Name Node’s Local File System and stores a record/entry for *all changes* that happen in File System Metadata.
+- If the number of edit logs and FSImage is big, more metadata is stored by *NameNode*. Therefore, naturally, it takes more time to start. A lot of small files also bring a communication overhead—*NameNode* handles information of more blocks, so it communicates more often with *DataNodes*.
 
 **What is the job in Hadoop eco system?**
 - A job is a *task* submitted to the cluster by the user
@@ -200,7 +215,9 @@ Hadoop cluster is the 3 masters (namenode, secondary namenode, job tracker)
     - Storing TB, PB. Less number of large files and each file more than 100MB
     - Streaming data: WORM (write once read many)
 - Bad for:
-    - Large amount of small files
+    - Large amount of small files. It has to do a lot of work while handling FSImages and edit logs because more files should be written. 
+    -  Reading through small files involve lots of seeks and lots of hopping between data node to data node. The block in HDFS is represented as an object. Each of these objects is in the size of 150 bytes. If we consider 10 Million small files, each of these files will be using a separate block. That will cause to a use of 3 gigabytes of memory. 
+    - https://data-flair.training/forums/topic/what-is-small-file-problem-in-hadoop/
     - Better for less number of large files, instead of small files 
     - Cannot edit file, only append to the end of file (from Hadoop 2.1)
 
@@ -228,9 +245,21 @@ $
 - YARN also manages to switch the *Standby Namenode* in case of failure of the Namenode. Also when both, active namenode and secondary name node fail, we have the secondary name node.
 
 ### Hadoop 3.x 
-- Ensure encoding: Data is replicated 3 times, but in Hadoop version 3, parity bit encoding is used (parity block), only you need 50% more space. XOR logic
+- **Fault Tolerance:** Erasure Coding for Fault Tolerance: in Hadoop 2.x data is replicated 3 times, but in Hadoop version 3, parity bit encoding is used (parity block), only you need 50% more space. Under erasure coding, the blocks are not replicated; HDFS calculates the parity blocks for all file ones. At present, whenever the file blocks are down, Hadoop recreates through the rest blocks and parity blocks.
 - For example you have A, B, C blocks of data. You will have AB, and BC.
+- **Storage Overhead:** It minimizes the storage overhead of the data as Hadoop 3 adopted Erasure Coding 
+    - The storage overhead in Hadoop 2.x is 200% with the default replication factor of 3.
+- **DataNode Balancing:** A single DataNode manages many disks. These disks fill up evenly during a normal write operation. However, adding or replacing disks can lead to the significant skew within a DataNode. There is the HDFS balancer in Hadoop 2.x, which cannot cope with this problem.
+    - New Intra-DataNode balancing from Hadoop 3 
+    - set `dfs.disk.balancer.enabled` configuration to true on all DataNodes
+    - The HDFS Balancer re-balances data across the DataNodes, moving blocks from over-utilized to under-utilized nodes. HDFS data might not always be distributed uniformly across DataNodes.
+- **Scalability:** There is an opportunity to scale more than 10000 nodes per cluster.
 
+### Hadoop Installations
+- On-premises or cloud
+- You have to consider the long-run cost, scalability and agility
+- If you choose **on-premise**, it is cheaper in the long-run if properly sized and provisioned. Much more effort is required for configuration and management. The full cost of infrastructure is required upfront. It's hard to scale. You will have to buy servers which takes much time. In addition, it's less agile.
+- Whereas **cloud** is more expensive in the long-run, but way cheaper upfront. It's easier to scale and less effort is required for management and support.
 
 ## Hive: Big data SQL
 **What is the Apache Hive?**
@@ -482,4 +511,15 @@ SPARK_PUBLIC_DBS
     - YARN:
         - You can specify how many executors you want, and how much memory and core for each executor (executor=process inside node responsible to run tasks of the same job).
 
-https://blog.cloudera.com/how-to-tune-your-apache-spark-jobs-part-1/
+
+## More:
+- Small file problem in Hadoop: https://data-flair.training/forums/topic/what-is-small-file-problem-in-hadoop/
+
+- **Parallel computing vs distributed computing.** The main difference between parallel and distributed computing is that parallel computing allows multiple processors to execute tasks simultaneously while distributed computing divides a single task between multiple computers to achieve a common goal. 
+    - https://pediaa.com/what-is-the-difference-between-parallel-and-distributed-computing/
+    - https://medium.com/@arunaraj2468/how-is-hadoop-different-from-other-parallel-computing-systems-2a11a5ede574
+    - https://www.geeksforgeeks.org/difference-between-parallel-computing-and-distributed-computing/
+
+- https://blog.cloudera.com/how-to-tune-your-apache-spark-jobs-part-1/
+
+-

@@ -6,16 +6,13 @@ Welcome to my big data engineering and analytics repository. I will constantly u
 <!-- 
 What data engineer should know:
 Need to have an experience on Python (data science related, OOP), ETL (Extract, Transform, Load) process, data warehousing (Snowflake), Databases (MSSQL/Postgres/MySQL), SQL+ORM, REST/SOAP/GraphQL APIs, Django/Flask/FastAPI, Azure, AWS, Airflow, Big Data 
-
-How to learn: google it, books, youtube, linkedin learning
-Websites: cognitiveclass, mygreatlearning, coursera, datacamp, linkedin, orelly
 -->
   
-    Tech: Python, SQL, NoSQL, Cloud (AWS), Docker (Kubernetes), Linux Bash, Networking
+    Tech: Python, SQL, NoSQL, Docker (Kubernetes), Linux Bash, Networking
 
-    Big data: Hadoop (HDFS, YARN), Spark (Streaming), Kafka, Hive, Airflow
+    Big data: Hadoop (HDFS, YARN), Spark (Streaming), Kafka, Hive, Airflow, Cloud (AWS)
 
-## Big Data Engineering
+## Big Data
 - https://cognitiveclass.ai/learn `big data`
 - https://www.mygreatlearning.com/academy#our-courses `big data`
 - https://www.coursera.org/professional-certificates/ibm-data-engineer `IBM`
