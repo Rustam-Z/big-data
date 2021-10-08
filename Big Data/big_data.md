@@ -160,8 +160,8 @@ or the increase in the amount of data stored.
 
 **Functionality of each component**
 - Master node
-    - **Namenode** = central file system manager, the central piece of HDFS, client applications communicate to the NameNode at any time they need to locate a file, or when the file should be added, copied, moved or deleted.
-    - **Secondary namenode** = data backup of name node (not a hot standby), kind of checkpoint.
+    - **Namenode** = central file system manager, the central piece of HDFS, client applications communicate to the NameNode at any time they need to locate a file, or when the file should be added, copied, moved or deleted. NameNode stores the metadata like a number of blocks, replicas and other details. Metadata is present in memory in the master. 
+    - **Secondary namenode** = data backup of name node (not a hot standby), kind of checkpoint. The Secondary NameNode in Hadoop is a specially dedicated node in the HDFS cluster, whose main function is to take checkpoints of the file system metadata present on the NameNode. It is not a backup NameNode. It just checkpoints the NameNode's file system namespace. The Secondary NameNode is a helper to the primary NameNode but not a substitution for it. A NameNode is a single point of failure in HDFS. Thus, if the NameNode fails, the entire HDFS file system is lost. Therefore, to overcome this, Hadoop implemented Secondary NameNode, whose main function is to store a copy of the FsImage and edits log files.
     - **Job tracker**: Centralized job scheduler
 - Slave nodes
     - **Data nodes**: machines where the data gets stored and processed. All big data processing happens on the data node. It can perform jobs like semantic and language analysis, statistics and machine learning tasks, and also jobs like clustering, data import, data export, search, decompression and indexing.
@@ -169,6 +169,8 @@ or the increase in the amount of data stored.
 - **Note!** Every slave node keeps sending a heart beat signal to the name node once every 3 seconds to state that they are alive. What happens is when the data node goes down?
 
 **Extra Notes**
+- In *Hadoop 1.x* if a NameNode, which is a master in the cluster, goes down, the whole cluster will be not available. 
+- In *Hadoop 2.0*, the HDFS High Availability feature addresses the above problem by providing an option to run two NameNodes in the same cluster in an Active/Passive configuration with a hot standby. This allows fast Failover to a new NameNode for any machine crashes or administrator-initiated fail-over for any planned maintenance activities.
 - [Are Secondary NameNode and Standby node mean the same thing?](https://community.cloudera.com/t5/Support-Questions/Are-Secondary-NameNode-and-Standby-node-mean-the-same-thing/td-p/221582)
 There are two different concepts. HDFS can be deployed in two modes. 1) Without HA 2) With HA.
 In without HA mode, HDFS will have Namenode and Secondary Namenode. Here, secondary namenode periodically take snapshot of namenode and keep the metadata (fsimage) and audit logs up to date. So in case of Namenode failure, Secondary Namenode will have copy of latest namenode activity and prevent data loss. 
@@ -521,5 +523,3 @@ SPARK_PUBLIC_DBS
     - https://www.geeksforgeeks.org/difference-between-parallel-computing-and-distributed-computing/
 
 - https://blog.cloudera.com/how-to-tune-your-apache-spark-jobs-part-1/
-
--
