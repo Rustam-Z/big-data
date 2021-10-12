@@ -1,3 +1,4 @@
+
 # All about Big Data 
 
 > Here you will find general information about big data, big data tools, and big data theory.
@@ -142,7 +143,7 @@ or the increase in the amount of data stored.
 - Rack: A collection of 40-50 nodes that are physically stored close together
 - Cluster: Interconnection of systems in a network, collection of racks
 - Distributed systems: A system composed to multiple autonomous computers that communicate through a computer network
-- HA: high availability, ensures the availability of the Hadoop cluster without any downtime, even in unfavorable conditions like NameNode failure, DataNode failure, machine crash, etc. It means if the machine crashes, data will be a*ccessible from another path*.
+- HA: high availability, ensures the availability of the Hadoop cluster without any downtime, even in unfavorable conditions like NameNode failure, DataNode failure, machine crash, etc. It means if the machine crashes, data will be *accessible from another path*.
 - Hot standby: uninterrupted failover. Hot standby is normally available to the users within minutes of a disaster situation.
 - Block: 128MB, the partition of big file distributed among data nodes
 
