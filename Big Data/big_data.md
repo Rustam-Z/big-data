@@ -49,7 +49,7 @@ Networking
 - **HDFS** = Hadoop distributes file system, stores data for many different locations, creating a centralized place to store and process the data.
 - **Hadoop YARN** = Yet another resource negotiator, YARN is a resource allocator which allocates resources to run your jobs. Manages the resources on the computing cluster, knows what nodes are available, heartbeat which keeps the cluster going. YARN in a nut shell has a master (Resource Manager = job tracker) and workers (Node manager = task tracker).
 - **Hadoop MapReduce**, programming model which allows us to process the data across the cluster. *Maps* transform the data in parallel across the cluster, *reducers* aggregate the data together.
-- **Apache Pig** - no need to write Python, Java code, high level API with SQL-like syntaxes.
+- **Apache Pig** -serialization no need to write Python, Java code, high level API with SQL-like syntaxes.
 - **Apache Hive** - `SQL query` Apache Hive is a data warehouse software project built on top of Apache Hadoop for providing data query and analysis. Hive gives an SQL-like interface to query data stored in various databases and file systems that integrate with Hadoop. Used mostly to make an analysis or report. 
 - **Ambari** - `Management and Monitoring`, sits on top of everything, tells info about Hadoop cluster, and visualize a cluster, how much resources I am using. Apache Ambari simplifies the management and monitoring of an Apache Hadoop cluster. 
 - **Apache Spark** -  general framework for distributed computing that offers high performance for both batch and interactive processing, "alternative of MapReduce", very fast and effective, can handle SQL queries, handle streaming the data. Spark's data processing speeds are up to 100x faster than MapReduce. Because Spark processes and retains data in memory for subsequent steps. https://www.ibm.com/cloud/blog/hadoop-vs-spark
@@ -62,7 +62,7 @@ Networking
 - **Flume** - `data collection`, web logs to cluster in real time for processing.
 
 - **Apache Kafka** - collect data from cluster of pcs, web services and broadcast that to Hadoop cluster. Solves the problem of data ingestion.
-- **Apache ZooKeeper** `Coordination` Zookeeper is used for a cluster node configuration. It is a centralized service in Hadoop, which maintains configuration information, naming as provide distributed synchronization. Additionally, it provides group services, manages and coordinates a large cluster of machines. 
+- **Apache ZooKeeper** `Coordination` Zookeeper is used for a cluster node **configuration**. It is a centralized service in Hadoop, which maintains configuration information, naming as provide distributed synchronization. Additionally, it provides group services, manages and coordinates a large cluster of machines. 
 
 
 ## Big Data
@@ -220,6 +220,8 @@ Hadoop cluster is the 3 masters (namenode, secondary namenode, job tracker)
 - Bad for:
     - Large amount of small files. It has to do a lot of work while handling FSImages and edit logs because more files should be written. 
     -  Reading through small files involve lots of seeks and lots of hopping between data node to data node. The block in HDFS is represented as an object. Each of these objects is in the size of 150 bytes. If we consider 10 Million small files, each of these files will be using a separate block. That will cause to a use of 3 gigabytes of memory. 
+    - Metadata on RAM for NameNode, expensive. DataNode perspective.
+    - Plain (XML, JSON), parquet, columnar, row-based
     - https://data-flair.training/forums/topic/what-is-small-file-problem-in-hadoop/
     - Better for less number of large files, instead of small files 
     - Cannot edit file, only append to the end of file (from Hadoop 2.1)
@@ -478,6 +480,7 @@ SPARK_PUBLIC_DBS
 **Performance tuning**
 - **Data serialization**
     - Less memory, faster operations
+    - Serialization in Java allows us to convert an Object to stream of bytes that we can send over the network or save it as file or store in DB for later usage. Deserialization = Object stream to Java Object
     - `conf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
 - **Memory tuning**
     - the amount of memory used by your objects

@@ -353,6 +353,66 @@ rdd.lookup(3) // [4, 6]
 - workers have read-only access
 - useful for reference data lookups
 
+### Spark ETL
+- Extract-Transform-Load
+- General structure:
+    - Extract - get data from the source system
+    - Cleansing - detect corrupted and inaccurate records
+    - Transform - apply functions to conform data to a standard dimensional schema
+    - Load - load the data into the Target Storage for consumption
+- **Extraction / loading steps**:
+    - Identify Data Source(s) / Target System
+    - Determine the frequency and number of generations planned to be kept
+    - Determine the data format to be extracted / loaded
+    - Determine the data size to be extracted / loaded
+- **Data cleansing**
+    - Removing incomplete data or duplicates
+    - Validating, we want the correct data
+    - Filtering, as we don't need all data
+    - Correcting record "if possible"
+- **Transformations**
+    - Data Type Conversion
+    - Data Joining / Combining
+    - Data Aggregation
+    - Data Encryption
+
+
+### Datasets and DataFrames 
+    - APIs available in Apache Spark: RDDs, DataFrames, and Dataset
+    - when and why you should use each of them
+    - performance and benefits
+
+- **RDD**
+    - RDD is a JVM object (distributed)
+    - API has transformations & actions
+    - they don't perform good when Spark need to share the data within the cluster
+    - overhead of serializing is expensive, need to send data and structure (each serialized object contains the class structure and values)
+
+- **DataFrame** = distribute collection of data organized into named column
+    - DataFrame stored data in off-heap memory and treats them as Row objects
+    - concept of schema to describe the data, similar to table in a relational database
+    - even better when single process
+    - not developer friendly, safety and lambda functions
+    - `df.filter("age > 21").collect.foreach(println)` // verbose syntax
+    - `df.filter(df.col("age").gt(21)).collect.foreach(println)` // concise syntax
+
+- **Dataset** = Dataset still keeps everything in off-heap memory but translates to JVM objects when needed
+    - internally rows, externally JVM objects, the familiar object-oriented programming style 
+    - concept of encoders which translate JVM representations (objects) and Spark’s internal binary format
+    - `dataset.filter(_.age > 21).collect.foreach(println)` // verbose syntax
+    - `dataset.filter(p => p.age < 21).collect.foreach(println)` // concise syntax
+
+#### Comparing Spark APIs
+
+- How data gets represented: RDD is a JVM object, while DataFrame stored data in off-heap memory and treats them as Row objects, Dataset still keeps everything in off-heap memory but translates to JVM objects when needed.
+- RDD can always be converted to both DataFrame and Dataset; same for Dataset, it also can be converted to both RDD and DataFrame; however, DataFrame cannot be converted to anything else.
+- Note, that Python and R have no compile-time type-safety, so they only have untyped APIs, namely DataFrames.
+
+
+## More
+- Serialization = conversion of the state of an object into a byte stream
+- Off-heap = object (serialized to byte array) that are manged by OS, and saved in native memory outside of the process heap
+
 ## Links
 - Tuning Spark: ttp://spark.apache.org/docs/latest/tuning.html#level-of-parallelism
 - Transformations and actions: https://www.slideshare.net/SparkSummit/transformations-and-actions-a-visual-guide-training
