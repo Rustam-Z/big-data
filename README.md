@@ -1,6 +1,8 @@
 # All about big data engineering 
 *Learn, Practice, Apply*
 
+Rustam-Z 🚀
+
 Welcome to my big data engineering and analytics repository. I will constantly update the repository with the big data theory and hands-on knowledge of big data tools, and best practices. And, of course, with interesting resources for exploring the big data.
 
 ## Big Data Engineering
